@@ -1,0 +1,374 @@
+@import './colors';
+@import './mixins';
+@import './components';
+ 
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+} 
+
+html {
+    font-size: 62.5%;
+    scroll-behavior: smooth;
+}
+
+body{
+    font-family: 'Open Sans', sans-serif;
+    font-size: 1.6rem;
+}
+ 
+// NAV
+.burger-btn {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 1em;
+    background: none;
+    border: 1px solid transparent;
+    cursor: pointer;
+    z-index: 1000;
+
+    &:focus {
+        outline: none;
+        border: 1px solid rgba(255, 255, 255, .5);
+        border-radius: 8px;
+    }
+    
+    &:hover {
+        .burger-btn__bars::after, .burger-btn__bars::before {
+            width: 100%;
+        }
+    }
+
+    &__box {
+        position: relative;
+        width: 40px;
+        height: 30px;
+    }
+
+    &__bars,
+    &__bars::after,
+    &__bars::before {
+        @include burgerBtn;
+    }
+    
+
+    &__bars {
+        width: 100%;
+
+        &::after {
+            top: 13px;
+            width: 60%;
+        }
+
+        &::before {
+            top: 27px;
+            width: 30%;
+        }
+    }
+}
+
+//nav
+
+.nav {
+    position: fixed;
+    top: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100%;
+    background-image: $blue-gradient-solid;
+    transform: translateX(100%);
+    transition: .5s cubic-bezier(0.65, 0.05, 0.36, 1);
+    z-index: 100;
+
+    &--active {
+        transform: translateX(0);
+    }
+
+    &__item {
+        position: relative;
+        display: block;
+        margin: 0.5em 0;
+        padding: 0.5em 2em;
+        font-size: 2.8rem;
+        color: $pure-white;
+        text-decoration: none;
+
+        &::before {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 3px;
+        height: 100%;
+        transform: scaleY(0);
+        background-color: $pure-white;
+        transition: transform .3s;
+        content: '';
+        }
+
+        &:hover:before {
+            transform: scaleY(1);
+        }
+    }
+}
+
+@keyframes navItemsAnimation {
+    from {
+        transform: translateX(200%);
+    }
+    to {
+        transform: translateX(0);
+    }
+}
+
+.nav-items-animation {
+    animation: navItemsAnimation 1s both;
+}
+
+//HEADER
+
+.header {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 2em;
+    height: 75vh;
+    text-align: center;
+    color: $pure-white;
+    @include heroImages('../img/palm_640.jpg');
+    background-attachment: scroll;
+
+    &__heading {
+        font-family: 'Dancing Script', cursive;
+        font-size: 4.8rem;
+        font-weight: 300;
+    }
+
+    &__heading {
+        font-size: 1.6rem;
+
+    }
+
+    &__btn {
+        margin-top: 2em;
+        padding: 0.8em 1.6em;
+        font-size: 1.4rem;
+        background-color:rgba(255, 255, 255, .8);
+        border: none;
+        border-radius: 8px;
+        color: $dark;
+        text-decoration: none;
+        text-transform: uppercase;
+        cursor: pointer;
+
+        &::before {
+            background-color: $light-white;
+        }          
+    }
+}
+
+
+
+//HEADER
+
+.section-heading {
+    position: relative;
+    margin-bottom: 2em;
+    font-size: 3rem;
+    font-weight: 300;
+    text-transform: uppercase;
+    text-align: center;
+    color: $main-color;
+}
+
+.section-padding {
+    padding: 6em 2em; 
+}
+ 
+
+.dreams {
+    &__box{
+        display: flex;
+        flex-direction: column;
+        margin: 2em 0;
+    }
+    &__img{
+        width:100%;
+        margin-bottom: 1em;
+    }
+    &__title{
+        margin-bottom: 0.5em;
+    }
+    &__text{
+        font-size: 1.4rem;
+    }
+}
+
+
+//HERO-IMG
+
+.hero-img{
+    position: relative;
+    padding: 10em 2em;
+    @include heroImages('../img/hd-wallpaper-_640.jpg');
+    text-align: center;
+    color: $pure-white;
+
+    &__title{
+        font-family: 'Dancing Script', cursive;
+        margin-bottom: .5em;
+        font-size: 4.8rem;
+    }
+
+    &__text{
+        padding: 1em 0;
+
+    }
+
+}
+
+
+//ISLAND
+
+.island {
+    position: relative;
+    margin: 1em 0;
+    height: 450px;
+    color: $pure-white;
+    color: tomato;
+    text-align: center;
+    
+
+}
+
+
+
+//MEDIA
+
+
+
+@media(min-width: 576px){
+    .dreams {
+        &__box{
+            flex-direction: row;
+            justify-content: space-between;
+        }
+        &__box-text{
+            width:55%;
+            font-size: 1.8rem;
+        }
+        &__box-text--right{
+            text-align: right;
+        }
+        &__box-img{
+            width: 40%;
+            justify-content: space-between;
+        }
+        &__box--right{
+            flex-direction:row-reverse;
+        }
+        &__img{
+            margin-bottom: 0;
+            height: 300px;
+    }
+}
+}
+
+@media(min-width: 768px){
+    .white-block{
+        height: 45px;
+        width: 45%;
+    }
+    .header {
+        &__heading{
+            font-size: 6.6rem;
+        }
+        &__text{
+            font-size: 2rem;
+        }
+    }
+    .section-heading {
+        font-size: 3.6rem;
+    }
+    .section-padding {
+        padding: 8em 2em; 
+    }
+    .dreams__text{
+        font-size: 1.8rem;
+    }
+    .hero-img{
+        padding: 15em 2em;
+
+        hr {
+            margin: 0 auto;
+            width: 50%;
+        }
+
+        &__text{
+            font-size: 2.2rem;
+        }
+    }
+
+}
+
+@media(min-width: 992px){
+    .section-heading {
+        font-size: 4.8rem;
+    }
+    .section-padding {
+        padding: 10em 2em; 
+     }
+
+    .burger-btn {
+        top: 50px;
+        right: 50px;
+    }
+    .header {
+        background-image: $blue-gradient, url('../img/palm_1920.jpg');
+    }
+
+    .nav{
+        &__item{
+            font-size: 4.8rem;
+        }
+    }
+    .dreams {
+        &__box{
+            &-text{
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-end;
+                margin-bottom: 2.5em;
+            }
+        }
+
+        &__title{
+            font-size: 3.6rem;
+        }
+
+        &__text{
+            font-size: 2.2rem;
+        }
+    }
+    .hero-img{
+        padding: 20em 2em;
+        background-image: $blue-gradient, url('../img/hd-wallpaper-_1920.jpg');
+
+        hr {
+            width: 40%;
+            max-width: 600px;
+        }
+
+        &__title{
+            font-size: 7.2rem;
+        }
+    }
+
+}
